@@ -7,19 +7,21 @@
   </ion-navbar>
 </ion-header>
 
+
 <ion-content padding>
+
+  <div class="query">
   <h3>Ionic Menu Starter</h3>
   <div class="multiple-choice-dropdown" style="border: 1px solid !important; border-radius: 7px !important;">
     
 
     <ion-item class="ion-item-custom" style=" border-radius: 7px !important;">
-        <div  
-        ion-button item-left clear *ngFor="let product of Products" style="padding:0 0px">
-        <div ion-button>{{product.name}}</div> 
+        <div class="button-inner-div"
+         item-left clear *ngFor="let product of Products" style="padding:0 0px">
+        <div class="button-inner-div-div">{{product.name}}</div> 
       </div>
       
-      <ion-input [(ngModel)] = "productcreds.name" type="text" placeholder="Search ..."></ion-input>
-      
+      <ion-input [(ngModel)] = "productcreds.name" type="text" placeholder="..."></ion-input>
       <!--<div ion-button clear item-right><h1 style="margin:0px">sdasd</h1></div>-->
       <button   ion-button clear item-right icon-only (click)="addToArray(productcreds)">
         <ion-icon name="ios-add-outline"></ion-icon>
@@ -28,4 +30,38 @@
   </div>
 
 <button ion-button (click)="getProducts(productcreds)" >Give me the discounts</button>
+</div>
+
+
+
+
+<div class="result">
+  <ion-grid >
+      <ion-row>
+        <ion-col><div class="result-title">Name</div></ion-col>
+        <ion-col><div class="result-title">Price</div></ion-col>
+        <ion-col><div class="result-title">Shop</div></ion-col>
+        
+      </ion-row>
+      <ion-row item-left clear *ngFor="let productDetail of ProductDetails" >
+         
+          <ion-col >
+              <div class="result-found-name">
+                {{productDetail.name}}
+              </div>
+          </ion-col>
+          <ion-col >
+              <div class="result-found-default">
+                {{productDetail.price}}
+              </div>
+          </ion-col>
+          <ion-col >
+              <div class="result-found-default">
+                {{productDetail.shop.name}}
+              </div>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+</div>
+
 </ion-content>

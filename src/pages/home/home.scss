@@ -14,8 +14,72 @@ page-home {
         border-radius: 7px !important;
         }
     }
-        
 
+    .button-inner-div {
+
+       border: 1px solid #ddd;
+       border-radius: 3px;
+       
+       .button-inner-div-div{
+            padding:2px;
+       }
+    }
+
+    .query{
+        height: 40%
+    }
+
+    .result{
+        background: #f2f2f2;
+        //height: 60%;   
+         min-height: 60.5%;
+        padding: 30px;
+
+        .result-title{
+            text-transform: uppercase;
+            font-size: 10px;
+            font-weight: bold;
+            color:rgb(161, 161, 161)
+        }
+
+        .result-found-name{
+            
+            font-size: 14px;
+            font-weight: bold;
+            color:rgb(94, 94, 94)
+        }
+
+        .result-found-default{
+            
+            font-size: 14px;
+         
+            color:rgb(94, 94, 94)
+        }
+
+        .grid{
+            padding:10px;
+            background: #fefefe;
+            border-radius: 10px;
+            box-shadow: 0 3rem 5rem -2rem rgba(0, 0, 0, 0.2);
+        }
+    }
+/*
+    ion-content div{
+        display:inline-block;
+        position:relative;
+      }
+      
+      button{
+        position:absolute;
+        bottom:10px;
+        right:10px;
+      }
+      
+      textarea{
+        display:block;
+      }
+        
+*/
     
         
 }

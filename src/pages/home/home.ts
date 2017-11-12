@@ -11,12 +11,14 @@ export class HomePage {
 
   public Products:any=[];
   public Date:Date;
-
+  public ProductDetails:any=[];
 
 
   productcreds = {
     name: '',
   };
+
+
 
   constructor(public navCtrl: NavController, private queryprovider: QueryProvider,private storage: Storage) {
 
@@ -79,30 +81,29 @@ export class HomePage {
       this.Products.push({name:product});
     }
     this.productcreds.name = ''
-    console.log(this.productcreds.name)
   }
 
 
   getProducts(product) {
-    console.log(this.productcreds.name)
-    product = this.productcreds.name
-    this.queryprovider.getproducts(product).then(data => {
-      console.log(data)
+    if (this.productcreds.name != ''){
+      product = this.productcreds.name
+      this.Products.push({name:product});
+      console.log(this.Products);
+      console.log(this.productcreds.name)
+      product = this.productcreds.name
+      this.queryprovider.getproducts(product).then(data => {
+        this.ProductDetails = data;
+        console.log(this.ProductDetails)
+        console.log(this.Products)
+        
+      })
+      this.productcreds.name = ''
       
-      var today = new Date();
-      var mn = today.getMinutes();
-      var hh = today.getHours();
-      var dd = today.getDate();
-      var mm = today.getMonth()+1;
-      var yyyy = today.getFullYear();
-
-      this.Date = today 
-      this.storage.set('dateSent', this.Date);
-      console.log(this.Date)
-      console.log(hh+':'+mn+'   /'+dd,'/'+mm,'/'+yyyy)
-
-    })
+      
+    }
+    
 }
+
   getTheDate(){
     var today = new Date();
     var mn = today.getMinutes();
