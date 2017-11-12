@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import {QueryProvider} from '../../providers/query/query'
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-home',
@@ -7,8 +9,109 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  public Products:any=[];
+  public Date:Date;
 
+
+
+  productcreds = {
+    name: '',
+  };
+
+  constructor(public navCtrl: NavController, private queryprovider: QueryProvider,private storage: Storage) {
+
+    
+    console.log(this.Products);
+    storage.get('dateSent').then((val) => {
+   
+      this.Date = val;
+      console.log('inside',this.Date)
+
+      var today = new Date();
+      var mn = today.getMinutes();
+      var hh = today.getHours();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1;
+      var yyyy = today.getFullYear();
+
+      console.log(hh+':'+mn+'   /'+dd,'/'+mm,'/'+yyyy)
+
+      var dateSent = new Date(this.Date);
+      var dateSent_mn = dateSent.getMinutes();
+      var dateSent_hh = dateSent.getHours();
+      var dateSent_dd = dateSent.getDate();
+      var dateSent_mm = dateSent.getMonth()+1;
+      var dateSent_yyyy = dateSent.getFullYear();
+      console.log(dateSent_hh+':'+dateSent_mn+'   /'+dateSent_dd,'/'+dateSent_mm,'/'+dateSent_yyyy)
+
+      if (dateSent_yyyy=yyyy){
+        console.log('year is the same')
+        if (dateSent_mm==mm){
+          console.log('month is the same',dateSent_mm,mm)
+          if (dateSent_dd==dd){
+            console.log('day is the same',dateSent_dd,dd)
+          
+            if (dateSent_hh==hh){
+              console.log('hour is the same',dateSent_hh,hh)
+              if (dateSent_mn==mn){
+                console.log('minute is the same')
+              }
+              else{
+                console.log('minute is different',dateSent_mn,mn)
+              }
+            }
+          }
+          else {
+            console.log('it was set earlier, gotta query it again',dateSent_dd,dd)
+          }
+        }
+        
+      }
+
+    });
+   
+  } 
+
+  addToArray(product){
+    product = this.productcreds.name
+    console.log(product)
+    if (this.productcreds.name != ''){
+      this.Products.push({name:product});
+    }
+    this.productcreds.name = ''
+    console.log(this.productcreds.name)
+  }
+
+
+  getProducts(product) {
+    console.log(this.productcreds.name)
+    product = this.productcreds.name
+    this.queryprovider.getproducts(product).then(data => {
+      console.log(data)
+      
+      var today = new Date();
+      var mn = today.getMinutes();
+      var hh = today.getHours();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1;
+      var yyyy = today.getFullYear();
+
+      this.Date = today 
+      this.storage.set('dateSent', this.Date);
+      console.log(this.Date)
+      console.log(hh+':'+mn+'   /'+dd,'/'+mm,'/'+yyyy)
+
+    })
+}
+  getTheDate(){
+    var today = new Date();
+    var mn = today.getMinutes();
+    var hh = today.getHours();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1;
+    var yyyy = today.getFullYear();
+    console.log(hh+':'+mn+'   /'+dd,'/'+mm,'/'+yyyy)
+    
   }
 
 }

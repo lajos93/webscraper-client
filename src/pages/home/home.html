@@ -9,10 +9,23 @@
 
 <ion-content padding>
   <h3>Ionic Menu Starter</h3>
+  <div class="multiple-choice-dropdown" style="border: 1px solid !important; border-radius: 7px !important;">
+    
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+    <ion-item class="ion-item-custom" style=" border-radius: 7px !important;">
+        <div  
+        ion-button item-left clear *ngFor="let product of Products" style="padding:0 0px">
+        <div ion-button>{{product.name}}</div> 
+      </div>
+      
+      <ion-input [(ngModel)] = "productcreds.name" type="text" placeholder="Search ..."></ion-input>
+      
+      <!--<div ion-button clear item-right><h1 style="margin:0px">sdasd</h1></div>-->
+      <button   ion-button clear item-right icon-only (click)="addToArray(productcreds)">
+        <ion-icon name="ios-add-outline"></ion-icon>
+      </button>
+    </ion-item>
+  </div>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+<button ion-button (click)="getProducts(productcreds)" >Give me the discounts</button>
 </ion-content>

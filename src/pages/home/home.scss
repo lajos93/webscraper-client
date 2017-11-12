@@ -1,3 +1,21 @@
 page-home {
+    .item-inner{
+        height: 48px;
+        border-bottom-color: transparent !important;
+        box-shadow: none !important;
+        
+    .ion-item-custom{
+        padding-left: 0px;
+        background-color:none !important;
+    }
 
+    ion-content .multiple-choice-dropdown{
+        border: 1px solid !important;
+        border-radius: 7px !important;
+        }
+    }
+        
+
+    
+        
 }
