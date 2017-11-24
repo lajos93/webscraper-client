@@ -21,7 +21,9 @@ export class QueryProvider {
       headers.append('Content-Type', 'application/json');
         this.http.get('https://webscraper-project.herokuapp.com/product/' + product,).subscribe(data => {
             //if(data.json().success)
-                resolve(data);
+                resolve([data,product]);
+                
+                
 
             //  else
                 reject(false);

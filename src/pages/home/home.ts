@@ -12,7 +12,7 @@ export class HomePage {
   public Products:any=[];
   public Date:Date;
   public ProductDetails:any=[];
-
+  public ProductArrays:any=[];
 
   productcreds = {
     name: '',
@@ -22,10 +22,10 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, private queryprovider: QueryProvider,private storage: Storage) {
 
-    
+
     console.log(this.Products);
     storage.get('dateSent').then((val) => {
-   
+
       this.Date = val;
       console.log('inside',this.Date)
 
@@ -52,7 +52,7 @@ export class HomePage {
           console.log('month is the same',dateSent_mm,mm)
           if (dateSent_dd==dd){
             console.log('day is the same',dateSent_dd,dd)
-          
+
             if (dateSent_hh==hh){
               console.log('hour is the same',dateSent_hh,hh)
               if (dateSent_mn==mn){
@@ -67,12 +67,12 @@ export class HomePage {
             console.log('it was set earlier, gotta query it again',dateSent_dd,dd)
           }
         }
-        
+
       }
 
     });
-   
-  } 
+
+  }
 
   addToArray(product){
     product = this.productcreds.name
@@ -85,23 +85,40 @@ export class HomePage {
 
 
   getProducts(product) {
+
     if (this.productcreds.name != ''){
       product = this.productcreds.name
+      console.log('this is thisproducts',this.Products);
       this.Products.push({name:product});
-      console.log(this.Products);
-      console.log(this.productcreds.name)
-      product = this.productcreds.name
-      this.queryprovider.getproducts(product).then(data => {
-        this.ProductDetails = data;
-        console.log(this.ProductDetails)
-        console.log(this.Products)
-        
-      })
+      if(this.Products.includes("risdrik")==true){
+        console.log('cool')
+      }
+      else{
+        console.log('ikke sa cool')
+      }
       this.productcreds.name = ''
-      
-      
     }
-    
+
+    var i;
+    for (i = 0; i < this.Products.length; i++) {
+      var productName = this.Products[i].name;
+
+
+      if(this.ProductArrays.find(o => o.name === productName)){
+        console.log('Already added');
+      }
+      else{
+        this.queryprovider.getproducts(productName).then(data => {
+          this.ProductArrays.push({name:data[1],details:data[0],amount:data[0].length,alreadyAdded:true});
+
+        })
+      }
+
+
+    }
+
+
+
 }
 
   getTheDate(){
@@ -112,7 +129,7 @@ export class HomePage {
     var mm = today.getMonth()+1;
     var yyyy = today.getFullYear();
     console.log(hh+':'+mn+'   /'+dd,'/'+mm,'/'+yyyy)
-    
+
   }
 
 }
