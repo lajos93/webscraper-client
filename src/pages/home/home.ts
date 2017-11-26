@@ -86,16 +86,13 @@ export class HomePage {
 
   getProducts(product) {
 
+
+
     if (this.productcreds.name != ''){
       product = this.productcreds.name
       console.log('this is thisproducts',this.Products);
       this.Products.push({name:product});
-      if(this.Products.includes("risdrik")==true){
-        console.log('cool')
-      }
-      else{
-        console.log('ikke sa cool')
-      }
+
       this.productcreds.name = ''
     }
 
@@ -113,6 +110,7 @@ export class HomePage {
 
         })
       }
+
 
 
     }

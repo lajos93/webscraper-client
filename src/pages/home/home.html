@@ -31,7 +31,7 @@
     </ion-item>
   </div>
 
-<button ion-button (click)="getProducts(productcreds)" >Give me the discounts</button>
+
 </div>
 
 <div class="result">
@@ -43,7 +43,7 @@
       <span class="query-word-title-name">{{productArray.name}}</span>
       <span class="query-word-title-amount">{{productArray.amount}} items</span>
     </div>
-    <div class="query-word-foundItems">
+    <div class="query-word-foundItems" id="query-word-foundItems">
       <ion-grid >
         <ion-row>
             <ion-col><div class="result-title">Name</div></ion-col>
